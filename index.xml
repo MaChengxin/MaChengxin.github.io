@@ -6,7 +6,16 @@
     <description>Recent content on Chengxin Ma</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 05 Feb 2021 22:00:20 +0100</lastBuildDate><atom:link href="https://cxma.me/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Feb 2021 12:06:51 +0100</lastBuildDate><atom:link href="https://cxma.me/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Project #1 - Buffer Pool Notes</title>
+      <link>https://cxma.me/posts/cmu-15445-fall-2020-project-1-notes/</link>
+      <pubDate>Sun, 07 Feb 2021 12:06:51 +0100</pubDate>
+      
+      <guid>https://cxma.me/posts/cmu-15445-fall-2020-project-1-notes/</guid>
+      <description>&lt;p&gt;Notes of the 1st project of the course &lt;a href=&#34;https://csd.cmu.edu/course-profiles/15-445_645-Database-Systems&#34;&gt;15-445/645 Database Systems&lt;/a&gt;, 2020 Fall version.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Hello World</title>
       <link>https://cxma.me/posts/hello-world/</link>

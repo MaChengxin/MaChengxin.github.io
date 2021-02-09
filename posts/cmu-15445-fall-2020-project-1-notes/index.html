@@ -132,7 +132,7 @@ the actual buffer pool where data is cached in memory.</li>
 <li>A <em>Page Table</em>:
 a mapping between pages and the frames they are put in.</li>
 <li>A <em>Replacer</em>:
-responsible for maintaining unpinned frames which are candidates for being replaced in cases such as a page needs to be created or a page needs to be fetched from disk.</li>
+responsible for maintaining unpinned frames which are candidates for being replaced, for example, when a page needs to be created or a page needs to be fetched from disk.</li>
 <li>A <em>Free List</em>:
 list of free frames which can be used as the first choice for a new page or page fetched from disk.</li>
 </ul>
@@ -148,10 +148,10 @@ is not used in this project.</li>
 <li><strong>NewPage</strong>: creates a new page in the buffer pool.
 <ul>
 <li><em>Buffer Pool</em>:
-NewPage is only possible when there is space in the buffer pool.
+<code>NewPage</code> is only possible when there is space in the buffer pool.
 (Either there is a free frame or there is a frame which can be safely replaced.)</li>
 <li><em>Page Table</em>:
-If a free frame is used to host the new page, this (frame, page) pair needs to be added to the page table;
+If a free frame is used to host the new page, this <code>(frame, page)</code> pair needs to be added to the page table;
 if the new page replaces a victim page in the buffer pool, the page table needs to be updated accordingly.</li>
 <li><em>Replacer</em>:
 The replacer should mark the frame where the new page is on as not replaceable (i.e. not on the list of replaceable frames).</li>
@@ -164,7 +164,7 @@ If the new page replaces another one in the buffer pool, the replaced page needs
 <li><strong>DeletePage</strong>: deletes a page from the buffer pool.
 <ul>
 <li><em>Buffer Pool</em>:
-DeletePage has an effect only when:<br>
+<code>DeletePage</code> has an effect only when:<br>
 1. The requested page exists in the buffer pool;<br>
 2. The requested page isn’t used by someone else (which can be known by checking the pin count).</li>
 <li><em>Page Table</em>:
@@ -200,7 +200,7 @@ Same as in the case of making a new page.</li>
 <li><strong>UnpinPage</strong>: unpins the target page from the buffer pool.
 <ul>
 <li><em>Buffer Pool</em>:
-The function unpin does two things: decrement the pin count of the requested page by 1, and potentially set the dirty flag.
+The function unpin does two things: decrementing the pin count of the requested page by 1, and potentially setting the dirty flag.
 Unpin can be done only when the page is in the buffer pool, and has a positive pin count.
 <strong>The dirty flag is set to true as long as one call to unpin has set it true</strong>.</li>
 <li><em>Page Table</em>:
@@ -228,8 +228,8 @@ No change.</li>
 <li><em>Disk</em>:
 If the requested page exists and has a valid page ID, it needs to be flushed to disk if dirty.
 Doing the dirty flag check will prevent unnecessary writes to disk, but we must make sure that the dirty flag is indeed set when we do other operations.
-For instance, if we call NewPage and change the new page&rsquo;s data, we need to explicitly call Unpin(page_id, true) to set the dirty flag.
-On the other hand, we can give away this dirty flag check, i.e., every time we call FlushPage the page will be flushed to disk, even if the data on disk is the same as in memory.</li>
+For instance, if we call <code>NewPage</code> and change the new page&rsquo;s data, we need to explicitly call <code>Unpin(page_id, true)</code> to set the dirty flag.
+On the other hand, we can give away this dirty flag check, i.e., every time we call <code>FlushPage</code> the page will be flushed to disk, even if the data on disk is the same as in memory.</li>
 </ul>
 </li>
 </ul>
@@ -245,11 +245,11 @@ This might be logically straightforward, but the resulting buffer pool might be 
 <p>The <code>BufferPoolManager</code> will reuse the same <code>Page</code> object to store data as it moves back and forth to disk. This means that the same <code>Page</code> object may contain a different physical page throughout the life of the system. The <code>Page</code> object&rsquo;s identifier (<code>page_id</code>) keeps track of what physical page it contains.</p>
 </blockquote>
 <h2 id="choices-left-for-us">Choices left for us</h2>
-<p>For some parts of the project, it was left to us to decide on which data structure to use.
+<p>For some parts of the project, it was left to us to decide on which data structures to use.
 It turned out that a poor choice could lead to an extremely poor performance and thus not passing the Gradescope tests.</p>
 <p>The following test case was designed to test the behaviour of the buffer pool manager with a large buffer size.
 In this test, the buffer pool size is set to 100k.
-50k new pages are made and unpinned immediately, followed by making another 100k new pages.
+50k new pages are created and unpinned immediately, followed by creating another 100k new pages.
 Since there is not enough space to store the second half of the 100k pages, the unpinned 50k new pages would be replaced.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">TEST(BufferPoolManagerTest, HugeBufferTest) {
  <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string db_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;test.db&#34;</span>;
@@ -357,7 +357,7 @@ Therefore, the time complexity of <code>Unpin</code> becomes <code>O(Nlog(N))</c
 <p>In the initial implementation, <code>remove</code> actually does a comparison between the to-be-removed value and each element in the list, and we rely on this fact to throw away the &ldquo;is-in-list&rdquo; check.
 The time complexity is <code>O(N^2)</code>.
 In the improved implementation, we do the check using the <code>std::set</code> (<code>O(log(N))</code> complexity).
-Because in the test case there is actually no duplicate frames in the list of the unpinned frames (the space for the last 50k pages were made by <code>pop_front</code> instead of <code>remove</code>), the <code>if (frames_set_.find(frame_id) != frames_set_.end())</code> statement doesn&rsquo;t hold, thus the expensive operation <code>unpinned_frames_.remove(frame_id)</code> is not executed.
+Because in the test case there is actually no duplicate frames in the list of the unpinned frames, the <code>if (frames_set_.find(frame_id) != frames_set_.end())</code> statement doesn&rsquo;t hold, thus the expensive operation <code>unpinned_frames_.remove(frame_id)</code> is not executed.
 Overall, the time complexity of <code>Pin</code> is reduced to <code>O(Nlog(N))</code>.</p>
 <h1 id="tips">Tips</h1>
 <p>Understanding the specs is important.

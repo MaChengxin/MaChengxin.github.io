@@ -25,5 +25,16 @@
       <description>Hello World!</description>
     </item>
     
+    <item>
+      <title></title>
+      <link>https://cxma.me/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cxma.me/contact/</guid>
+      <description>You can contact me via email.
+The domain name of this website is a substring of my email address, which uses the short email domain provided by ProtonMail.
+To verify your guess: the SHA-256 hash of my email address starts with 9b4c2074.</description>
+    </item>
+    
   </channel>
 </rss>

@@ -43,6 +43,11 @@
   </url>
   
   <url>
+    <loc>https://cxma.me/contact/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://cxma.me/categories/</loc>
   </url>
   

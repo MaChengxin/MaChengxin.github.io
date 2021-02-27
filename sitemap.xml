@@ -1,59 +1,37 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://cxma.me/tags/c&#43;&#43;/</loc>
     <lastmod>2021-02-07T12:06:51+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cxma.me/</loc>
     <lastmod>2021-02-07T12:06:51+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cxma.me/tags/cmu/</loc>
     <lastmod>2021-02-07T12:06:51+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cxma.me/tags/database/</loc>
     <lastmod>2021-02-07T12:06:51+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cxma.me/posts/</loc>
     <lastmod>2021-02-07T12:06:51+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cxma.me/posts/cmu-15445-fall-2020-project-1-notes/</loc>
     <lastmod>2021-02-07T12:06:51+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cxma.me/tags/</loc>
     <lastmod>2021-02-07T12:06:51+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cxma.me/posts/hello-world/</loc>
     <lastmod>2021-02-05T22:00:20+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cxma.me/certificates/</loc>
     <priority>0</priority>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cxma.me/contact/</loc>
     <priority>0</priority>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cxma.me/categories/</loc>
   </url>
-  
 </urlset>

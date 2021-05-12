@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on Chengxin Ma</title>
+    <link>https://cxma.me/tags/java/</link>
+    <description>Recent content in Java on Chengxin Ma</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 10 May 2021 13:50:01 +0200</lastBuildDate><atom:link href="https://cxma.me/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Notes on Spring Tutorial: Creating Asynchronous Methods</title>
+      <link>https://cxma.me/posts/notes-on-spring-tutorial-creating-asynchronous-methods/</link>
+      <pubDate>Mon, 10 May 2021 13:50:01 +0200</pubDate>
+      
+      <guid>https://cxma.me/posts/notes-on-spring-tutorial-creating-asynchronous-methods/</guid>
+      <description>&lt;p&gt;Some notes taken during following the &lt;a href=&#34;https://spring.io/guides/gs/async-method/&#34;&gt;&amp;ldquo;Creating Asynchronous Methods&amp;rdquo; tutorial&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

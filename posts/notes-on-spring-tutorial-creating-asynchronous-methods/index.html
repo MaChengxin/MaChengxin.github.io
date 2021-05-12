@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no"/>
+
+    <title>Notes on Spring Tutorial: Creating Asynchronous Methods | Chengxin Ma</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#FF3DB4">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cxma.me/css/main.min.113b8750726301d2272b2fabf9695ed6bfe79dff4f4cd582cb3010010ebceea4.css"/>
+
+    
+    
+    
+
+    
+    
+ 
+    </head>
+
+    <body>
+        
+<nav>
+  <header>
+    <div class="site-title">
+        <a href="/">Chengxin Ma</a>
+    </div>  
+</header>
+
+  <div class="nav-menu">
+  
+    <a class="color-link nav-link" href="/certificates/">Certificates</a>
+  
+    <a class="color-link nav-link" href="/contact/">Contact</a>
+  
+    <a class="color-link nav-link" href="/tags/">Tags</a>
+  
+</div>
+<footer class="footer">
+	<div class="social-icons">
+        
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+
+	<script src="https://cxma.me/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+</footer>
+</nav>
+
+        <div id="content" class="content-container">
+        
+
+<h1 class="post-title">Notes on Spring Tutorial: Creating Asynchronous Methods</h1>
+    
+    <time>May 10, 2021</time>
+    
+    <div>
+        <p>
+        <p>Some notes taken during following the <a href="https://spring.io/guides/gs/async-method/">&ldquo;Creating Asynchronous Methods&rdquo; tutorial</a>.</p>
+<h1 id="spring">Spring</h1>
+<h2 id="application-context">Application Context</h2>
+<p>According to <a href="https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/beans.html">the documentation of Spring</a>:</p>
+<blockquote>
+<p>The interface <code>org.springframework.context.ApplicationContext</code> represents the Spring IoC container and is responsible for instantiating, configuring, and assembling beans.</p>
+</blockquote>
+<p>The high-level view of Spring:
+<img src="/images/spring-container.png" alt="spring container"></p>
+<p>The configuration metadata can be represented in XML, Java annotations (e.g. <code>@Autowired</code>), or Java code.</p>
+<h2 id="commandlinerunner">CommandLineRunner</h2>
+<p><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html">Spring Boot Features</a>:</p>
+<ul>
+<li>The <code>SpringApplication</code> class provides a convenient way to bootstrap a Spring application that is started from a <code>main()</code> method.</li>
+<li>The <code>CommandLineRunner</code> interface offers a <code>run</code> method, which is called just before <code>SpringApplication.run(…​)</code> completes.</li>
+</ul>
+<h1 id="asynchrony">Asynchrony</h1>
+<p>In <a href="https://www.merriam-webster.com/dictionary/synchronous">a dictionary</a>, the word &ldquo;synchronous&rdquo; means &ldquo;happening, existing, or arising at precisely the same time&rdquo;, while &ldquo;asynchronous&rdquo; means <a href="https://www.merriam-webster.com/dictionary/asynchronous">the opposite</a>.</p>
+<p>However, in the context of programming, the words may have different meanings.
+<a href="https://stackoverflow.com/a/748235/5723556">Quoted from Stack Overflow</a>:</p>
+<blockquote>
+<p>Synchronous or Synchronized means &ldquo;connected&rdquo;, or &ldquo;dependent&rdquo; in some way. In other words, two synchronous tasks must be aware of one another, and one task must execute in some way that is dependent on the other, such as wait to start until the other task has completed.
+Asynchronous means they are totally independent and neither one must consider the other in any way, either in the initiation or in execution.</p>
+</blockquote>
+<p>Therefore, synchronous tasks may not happen at the same time, but asynchronous tasks may, which conflicts with the definition in a dictionary.</p>
+<p>Sometimes the concept of asynchrony and multithreading come in the same context, although they are two different things.
+<a href="https://stackoverflow.com/a/748235/5723556">This answer</a> on Stack Overflow explains the difference very well with a demonstration.</p>
+<h2 id="thread-pool">Thread Pool</h2>
+<p>In programming, multithreading can be achieved in multiple ways.
+One way to do so is by using a thread pool, which maintains a pool of threads.
+When there are no tasks, these threads will be in the waiting state.
+When a task is submitted, and there are available threads, one thread will be assigned to take care of this task.
+If all threads are busy with other tasks, the new task will be queued, or we can create a new thread for it.</p>
+<p>The figure below depicts the task queue and the thread pool. (Source: <a href="https://en.wikipedia.org/wiki/Thread_pool">Wikipedia</a>)
+<img src="/images/thread-pool.svg" alt="thread pool"></p>
+<p>In Java, using thread pool sometimes involves some other concepts:</p>
+<ul>
+<li><code>Interface Executor</code>: executes submitted Runnable tasks. It decouples task submission from task execution.</li>
+<li><code>Interface Runnable</code>: should be implemented by any class whose instances are intended to be executed by a thread.</li>
+</ul>
+<p><a href="https://docs.oracle.com/javase/tutorial/essential/concurrency/executors.html">Thread Pools are the most common kind of executor implementation.</a></p>
+<h2 id="future">Future</h2>
+<p>A <code>Future</code> represents the result of an asynchronous computation.</p>
+<p>Here is a simple example: (Source: <a href="https://www.baeldung.com/java-future">Baeldung</a>)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SquareCalculator</span> <span style="color:#f92672">{</span>    
+    
+    <span style="color:#66d9ef">private</span> ExecutorService executor 
+      <span style="color:#f92672">=</span> Executors<span style="color:#f92672">.</span><span style="color:#a6e22e">newSingleThreadExecutor</span><span style="color:#f92672">();</span>
+    
+    <span style="color:#66d9ef">public</span> Future<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">calculate</span><span style="color:#f92672">(</span>Integer input<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>        
+        <span style="color:#66d9ef">return</span> executor<span style="color:#f92672">.</span><span style="color:#a6e22e">submit</span><span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>1000<span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">return</span> input <span style="color:#f92672">*</span> input<span style="color:#f92672">;</span>
+        <span style="color:#f92672">});</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Future<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> future <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SquareCalculator<span style="color:#f92672">().</span><span style="color:#a6e22e">calculate</span><span style="color:#f92672">(</span>10<span style="color:#f92672">);</span>
+
+<span style="color:#66d9ef">while</span><span style="color:#f92672">(!</span>future<span style="color:#f92672">.</span><span style="color:#a6e22e">isDone</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Calculating...&#34;</span><span style="color:#f92672">);</span>
+    Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>300<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+
+Integer result <span style="color:#f92672">=</span> future<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">();</span>
+</code></pre></div><p>The method <code>get</code> is used to retrieve the result from the future.
+It is a blocking method: it will wait until the result of the asynchronous computation is available.
+(In the example above the <code>get</code> method will return right away because of the <code>isDone</code> check before it.)</p>
+<h2 id="completable-future">Completable Future</h2>
+<p>A <code>Completable Future</code> is a <code>Future</code> that may be explicitly completed, and may be used as a <code>CompletionStage</code>,
+enabling us to chain operations together.</p>
+<p>Examples: (Source: <a href="https://www.baeldung.com/java-completablefuture">Baeldung</a>)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> completableFuture
+  <span style="color:#f92672">=</span> CompletableFuture<span style="color:#f92672">.</span><span style="color:#a6e22e">supplyAsync</span><span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;Hello&#34;</span><span style="color:#f92672">);</span>
+
+CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> future <span style="color:#f92672">=</span> completableFuture
+  <span style="color:#f92672">.</span><span style="color:#a6e22e">thenApply</span><span style="color:#f92672">(</span>s <span style="color:#f92672">-&gt;</span> s <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; World&#34;</span><span style="color:#f92672">);</span>
+
+assertEquals<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hello World&#34;</span><span style="color:#f92672">,</span> future<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">());</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> completableFuture
+  <span style="color:#f92672">=</span> CompletableFuture<span style="color:#f92672">.</span><span style="color:#a6e22e">supplyAsync</span><span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;Hello&#34;</span><span style="color:#f92672">);</span>
+
+CompletableFuture<span style="color:#f92672">&lt;</span>Void<span style="color:#f92672">&gt;</span> future <span style="color:#f92672">=</span> completableFuture
+  <span style="color:#f92672">.</span><span style="color:#a6e22e">thenAccept</span><span style="color:#f92672">(</span>s <span style="color:#f92672">-&gt;</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Computation returned: &#34;</span> <span style="color:#f92672">+</span> s<span style="color:#f92672">));</span>
+
+future<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">();</span>
+</code></pre></div><h1 id="tunning-the-application">Tunning the application</h1>
+<p>In <code>AppRunner</code>, we added three more users for <code>findUser</code>.
+The thread pool size was also increased to 3.</p>
+<p>The snippet of the log:</p>
+<pre><code>2021-05-11 22:06:56.045  INFO 20008 --- [ GithubLookup-3] c.e.asyncmethod.GitHubLookupService      : Looking up Spring-Projects
+2021-05-11 22:06:56.045  INFO 20008 --- [ GithubLookup-1] c.e.asyncmethod.GitHubLookupService      : Looking up PivotalSoftware
+2021-05-11 22:06:56.045  INFO 20008 --- [ GithubLookup-2] c.e.asyncmethod.GitHubLookupService      : Looking up CloudFoundry
+2021-05-11 22:06:57.602  INFO 20008 --- [ GithubLookup-3] c.e.asyncmethod.GitHubLookupService      : Looking up Google
+2021-05-11 22:06:57.602  INFO 20008 --- [ GithubLookup-1] c.e.asyncmethod.GitHubLookupService      : Looking up Microsoft
+2021-05-11 22:06:57.602  INFO 20008 --- [ GithubLookup-2] c.e.asyncmethod.GitHubLookupService      : Looking up Apple
+2021-05-11 22:06:58.831  INFO 20008 --- [           main] com.example.asyncmethod.AppRunner        : Elapsed time: 2797
+2021-05-11 22:06:58.831  INFO 20008 --- [           main] com.example.asyncmethod.AppRunner        : --&gt; User [name=Pivotal Software, Inc., blog=http://pivotal.io]
+2021-05-11 22:06:58.831  INFO 20008 --- [           main] com.example.asyncmethod.AppRunner        : --&gt; User [name=Cloud Foundry, blog=https://www.cloudfoundry.org/]
+2021-05-11 22:06:58.831  INFO 20008 --- [           main] com.example.asyncmethod.AppRunner        : --&gt; User [name=Spring, blog=https://spring.io/projects]
+2021-05-11 22:06:58.831  INFO 20008 --- [           main] com.example.asyncmethod.AppRunner        : --&gt; User [name=Google, blog=https://opensource.google/]
+2021-05-11 22:06:58.832  INFO 20008 --- [           main] com.example.asyncmethod.AppRunner        : --&gt; User [name=Microsoft, blog=https://opensource.microsoft.com]
+2021-05-11 22:06:58.832  INFO 20008 --- [           main] com.example.asyncmethod.AppRunner        : --&gt; User [name=Apple, blog=https://apple.com]
+</code></pre><p>Observations:</p>
+<ul>
+<li>The lookup was performed by 3 (instead of 6) dedicated threads.</li>
+<li>The order of lookup wasn&rsquo;t necessarily the same as in the source code.</li>
+</ul>
+<p>The annotation <code>@Async</code> indicates that the annotated method should run on a separate thread.
+The <code>@EnableAsync</code> annotation switches on Spring’s ability to run <code>@Async</code> methods in a background thread pool.
+If we disable the <code>@Async</code> annotation, the log would be:</p>
+<pre><code>2021-05-11 22:08:20.260  INFO 20024 --- [           main] c.e.asyncmethod.GitHubLookupService      : Looking up PivotalSoftware
+2021-05-11 22:08:21.812  INFO 20024 --- [           main] c.e.asyncmethod.GitHubLookupService      : Looking up CloudFoundry
+2021-05-11 22:08:22.964  INFO 20024 --- [           main] c.e.asyncmethod.GitHubLookupService      : Looking up Spring-Projects
+2021-05-11 22:08:24.124  INFO 20024 --- [           main] c.e.asyncmethod.GitHubLookupService      : Looking up Google
+2021-05-11 22:08:25.282  INFO 20024 --- [           main] c.e.asyncmethod.GitHubLookupService      : Looking up Microsoft
+2021-05-11 22:08:26.468  INFO 20024 --- [           main] c.e.asyncmethod.GitHubLookupService      : Looking up Apple
+2021-05-11 22:08:27.624  INFO 20024 --- [           main] com.example.asyncmethod.AppRunner        : Elapsed time: 7364
+2021-05-11 22:08:27.624  INFO 20024 --- [           main] com.example.asyncmethod.AppRunner        : --&gt; User [name=Pivotal Software, Inc., blog=http://pivotal.io]
+2021-05-11 22:08:27.624  INFO 20024 --- [           main] com.example.asyncmethod.AppRunner        : --&gt; User [name=Cloud Foundry, blog=https://www.cloudfoundry.org/]
+2021-05-11 22:08:27.624  INFO 20024 --- [           main] com.example.asyncmethod.AppRunner        : --&gt; User [name=Spring, blog=https://spring.io/projects]
+2021-05-11 22:08:27.624  INFO 20024 --- [           main] com.example.asyncmethod.AppRunner        : --&gt; User [name=Google, blog=https://opensource.google/]
+2021-05-11 22:08:27.625  INFO 20024 --- [           main] com.example.asyncmethod.AppRunner        : --&gt; User [name=Microsoft, blog=https://opensource.microsoft.com]
+2021-05-11 22:08:27.625  INFO 20024 --- [           main] com.example.asyncmethod.AppRunner        : --&gt; User [name=Apple, blog=https://apple.com]
+</code></pre><p>Observations:</p>
+<ul>
+<li>There was only one thread (i.e. the main thread) throughout the execution.</li>
+<li>As a result, the elapsed time increased significantly.</li>
+<li>The order of lookup was the same as in the source code.</li>
+</ul>
+<h1 id="references-and-further-reading">References and further reading</h1>
+<p>[1] <a href="https://stackoverflow.com/questions/6827752/whats-the-difference-between-component-repository-service-annotations-in">What&rsquo;s the difference between @Component, @Repository &amp; @Service annotations in Spring?</a></p>
+<p>[2] <a href="https://stackoverflow.com/questions/748175/asynchronous-vs-synchronous-execution-what-does-it-really-mean">Asynchronous vs synchronous execution, what does it really mean?</a></p>
+<p>[3] <a href="https://stackoverflow.com/questions/4844637/what-is-the-difference-between-concurrency-parallelism-and-asynchronous-methods">What is the difference between concurrency, parallelism and asynchronous methods?</a></p>
+<p>[4] <a href="https://stackoverflow.com/questions/34680985/what-is-the-difference-between-asynchronous-programming-and-multithreading">What is the difference between asynchronous programming and multithreading?</a></p>
+<p>[5] <a href="https://stackoverflow.com/questions/35329845/difference-between-completablefuture-future-and-rxjavas-observable">Difference between CompletableFuture, Future and RxJava&rsquo;s Observable</a></p>
+        </p>
+    </div>
+    
+
+    
+
+    <div class="page-footer">
+        
+        <hr class="footer-divider">
+        
+            <a class="tag" href="/tags/spring">#Spring</a>
+        
+            <a class="tag" href="/tags/async">#async</a>
+        
+            <a class="tag" href="/tags/java">#Java</a>
+        
+      
+    </div>
+
+
+        
+        </div>
+        <footer class="footer-mobile">
+	<div class="social-icons">
+        
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<div class="footer-mobile-links">
+		<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+		<span class="divider-bar">|</span>
+		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+	</div>
+
+	<script src="https://cxma.me/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+</footer>
+    </body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no"/>
+
+    <title>Project #2 - B&#43; Tree Checkpoint 1 Notes | Chengxin Ma</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#FF3DB4">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cxma.me/css/main.min.113b8750726301d2272b2fabf9695ed6bfe79dff4f4cd582cb3010010ebceea4.css"/>
+
+    
+    
+    
+
+    
+    
+ 
+    </head>
+
+    <body>
+        
+<nav>
+  <header>
+    <div class="site-title">
+        <a href="/">Chengxin Ma</a>
+    </div>  
+</header>
+
+  <div class="nav-menu">
+  
+    <a class="color-link nav-link" href="/certificates/">Certificates</a>
+  
+    <a class="color-link nav-link" href="/contact/">Contact</a>
+  
+    <a class="color-link nav-link" href="/tags/">Tags</a>
+  
+</div>
+<footer class="footer">
+	<div class="social-icons">
+        
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+
+	<script src="https://cxma.me/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+</footer>
+</nav>
+
+        <div id="content" class="content-container">
+        
+
+<h1 class="post-title">Project #2 - B&#43; Tree Checkpoint 1 Notes</h1>
+    
+    <time>July 11, 2021</time>
+    
+    <div>
+        <p>
+        <p>Notes on Checkpoint 1 of the 2nd project of the course <a href="https://csd.cmu.edu/course-profiles/15-445_645-Database-Systems">15-445/645 Database Systems</a>, 2020 Fall version.</p>
+<h1 id="introduction">Introduction</h1>
+<p>This project is to implement an indexing mechanism for a DBMS using the data structure <a href="https://en.wikipedia.org/wiki/B%2B_tree">B+ Tree</a>.
+The complexity of this project comes from multiple aspects:</p>
+<ul>
+<li>The data structure B+ Tree and associated operations per se.</li>
+<li>The application of B+ Tree in a database, e.g., what do keys, values, and nodes refer to in the context of a database, and how does it work with other parts of a DBMS.</li>
+<li>Some features of C++ that I am not familiar with used for the implementation.</li>
+<li>High-level project description, which requires us to refine the requirements ourselves by referring to the source code, textbook, course slides and notes, etc.</li>
+</ul>
+<h1 id="overview-of-implementation">Overview of implementation</h1>
+<p>We have two types of nodes in a B+ tree: internal and leaf.
+The following diagrams visualize how the nodes are implemented according to their types.</p>
+<p>First, this is the common representation of a B+ tree node:
+<img src="/images/b-plus-tree-node-common.png" alt="b-plus-tree-node-common"></p>
+<p>The way to implement a leaf node:
+<img src="/images/b-plus-tree-node-leaf.png" alt="b-plus-tree-node-leaf"></p>
+<p>The way to implement an internal node:
+<img src="/images/b-plus-tree-node-internal.png" alt="b-plus-tree-node-internal"></p>
+<p>And this is what happens when splitting an internal node:
+<img src="/images/b-plus-tree-node-internal-split.png" alt="b-plus-tree-node-internal-split"></p>
+<h1 id="c-features">C++ features</h1>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/cpp/cpp/templates-cpp?view=msvc-160">Templates</a>: for generic programming in C++.</li>
+<li><a href="https://stackoverflow.com/a/2351622/5723556">Explicit instantiation of templates</a>: to allow the template to only work for a couple of explicit types.</li>
+<li><a href="https://docs.microsoft.com/en-us/cpp/cpp/templates-cpp?view=msvc-160#non-type-parameters">Non-type parameters for templates</a>: we can pass non-type arguments to templates. Non-type parameters are mainly used for specifying max or min values or any other constant value for a particular instance of a template.</li>
+</ul>
+<h1 id="misc">Misc</h1>
+<ul>
+<li>
+<p><a href="https://stackoverflow.com/questions/295027/array-of-zero-length">A C hack to allow a flexible sized array</a></p>
+</li>
+<li>
+<p><a href="https://linuxconfig.org/how-to-switch-between-multiple-gcc-and-g-compiler-versions-on-ubuntu-20-04-lts-focal-fossa">Downgrading gcc version</a></p>
+</li>
+</ul>
+        </p>
+    </div>
+    
+
+    
+
+    <div class="page-footer">
+        
+        <hr class="footer-divider">
+        
+            <a class="tag" href="/tags/cmu">#CMU</a>
+        
+            <a class="tag" href="/tags/database">#database</a>
+        
+            <a class="tag" href="/tags/c&#43;&#43;">#C&#43;&#43;</a>
+        
+      
+    </div>
+
+
+        
+        </div>
+        <footer class="footer-mobile">
+	<div class="social-icons">
+        
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<div class="footer-mobile-links">
+		<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+		<span class="divider-bar">|</span>
+		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+	</div>
+
+	<script src="https://cxma.me/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+</footer>
+    </body>
+</html>

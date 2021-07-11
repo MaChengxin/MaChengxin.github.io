@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Chengxin Ma</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 26 May 2021 16:00:44 +0200</lastBuildDate><atom:link href="https://cxma.me/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Jul 2021 16:16:31 +0800</lastBuildDate><atom:link href="https://cxma.me/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Project #2 - B&#43; Tree Checkpoint 1 Notes</title>
+      <link>https://cxma.me/posts/cmu-15445-fall-2020-project-2-checkpoint-1-notes/</link>
+      <pubDate>Sun, 11 Jul 2021 16:16:31 +0800</pubDate>
+      
+      <guid>https://cxma.me/posts/cmu-15445-fall-2020-project-2-checkpoint-1-notes/</guid>
+      <description>&lt;p&gt;Notes on Checkpoint 1 of the 2nd project of the course &lt;a href=&#34;https://csd.cmu.edu/course-profiles/15-445_645-Database-Systems&#34;&gt;15-445/645 Database Systems&lt;/a&gt;, 2020 Fall version.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Sending Emails Using Spring Boot and Kotlin</title>
       <link>https://cxma.me/posts/sending-emails-using-spring-boot-and-kotlin/</link>

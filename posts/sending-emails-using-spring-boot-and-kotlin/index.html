@@ -135,7 +135,7 @@
 <p>The first step to create this application is to initiate an empty Spring project. This can be done via <a href="https://start.spring.io/">Spring Initializr</a>. Note that it is <a href="https://www.jetbrains.com/help/idea/spring-boot.html">integrated with IntelliJ IDEA Ultimate Edition</a>, which makes it even more convenient for project initialization.
 In Spring Initializr, we need to add <code>Java Mail Sender</code> (for the mailing functionality) and  <code>Spring Web</code> (for testing) as the dependencies. As a result, the following artifacts will be introduced to the <code>pom.xml</code> file: <code>spring-boot-starter-mail</code> and <code>spring-boot-starter-web</code>.</p>
 <p>To set up the “sender” of our emailing service, we can put the configurations in the <code>application.properties</code> file. (There should be an empty file of this name after the creation of the project.) If we use gmail as our sender, then we need to specify:</p>
-<pre><code>spring.mail.host=smtp.gmail.com
+<pre tabindex="0"><code>spring.mail.host=smtp.gmail.com
 spring.mail.port=587
 spring.mail.username=&lt;username of gmail account&gt;
 spring.mail.password=&lt;password of gmail account&gt;
@@ -144,19 +144,19 @@ spring.mail.properties.mail.smtp.starttls.enable=true
 </code></pre><p>Port 587 is one of the <a href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol#Ports">&ldquo;submission&rdquo; ports</a> for mail clients (e.g. the application we are working on).</p>
 <p>One more thing we need to do is to enable the <a href="https://support.google.com/accounts/answer/6010255">less secure app access of your Google account</a>. <strong>Don’t forget to turn it off on time!</strong></p>
 <p>To represent the email entity, we can make use of the <a href="https://kotlinlang.org/docs/data-classes.html">data class feature</a> of Kotlin:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Kotlin" data-lang="Kotlin"><span style="color:#66d9ef">data</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Email</span>(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Kotlin" data-lang="Kotlin"><span style="color:#66d9ef">data</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Email</span>(
        <span style="color:#66d9ef">val</span> to: String,
        <span style="color:#66d9ef">val</span> subject: String,
        <span style="color:#66d9ef">val</span> text: String,
        <span style="color:#66d9ef">val</span> withAttachment: Boolean
 )
 </code></pre></div><p>The core part of this application is the <code>EmailSenderService</code>, which exposes the <code>sendMail</code> function for other classes to use. Depending on the value of the Boolean field <code>withAttachment</code>, <code>sendMail</code> will compose different emails by calling different functions:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Kotlin" data-lang="Kotlin"><span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">sendMail</span>(email: Email) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Kotlin" data-lang="Kotlin"><span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">sendMail</span>(email: Email) {
    <span style="color:#66d9ef">val</span> msg = <span style="color:#66d9ef">if</span> (email.withAttachment) createMessageWithAttachment(email) <span style="color:#66d9ef">else</span> createSimpleMessage(email)
    emailSender.send(msg)
 }
 </code></pre></div><p>The implementation of creating the message is as follows:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Kotlin" data-lang="Kotlin"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">createSimpleMessage</span>(email: Email): MimeMessage {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Kotlin" data-lang="Kotlin"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">createSimpleMessage</span>(email: Email): MimeMessage {
    <span style="color:#66d9ef">val</span> message: MimeMessage = emailSender.createMimeMessage()
    <span style="color:#66d9ef">val</span> helper = MimeMessageHelper(message)
 
@@ -185,7 +185,7 @@ spring.mail.properties.mail.smtp.starttls.enable=true
 }
 </code></pre></div><h1 id="testing">Testing</h1>
 <p>We can create an controller that maps an endpoint to a function <code>sendEmail</code> for testing purposes:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Kotlin" data-lang="Kotlin"><span style="color:#a6e22e">@Controller</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Kotlin" data-lang="Kotlin"><span style="color:#a6e22e">@Controller</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EmailSenderController</span>(<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> emailSenderService: EmailSenderService) {
    <span style="color:#a6e22e">@PostMapping</span>(<span style="color:#e6db74">&#34;/mail/send&#34;</span>)
    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">sendEmail</span>(<span style="color:#a6e22e">@RequestBody</span> mail: Email): ResponseEntity&lt;Void&gt; {

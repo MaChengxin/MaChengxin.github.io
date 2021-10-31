@@ -244,7 +244,7 @@ On the other hand, we can give away this dirty flag check, i.e., every time we c
 <p>To represent the buffer pool, one might be tempted to make an array of frames, and each array element stores a pointer to the pages.
 This might be logically straightforward, but the resulting buffer pool might be scattered in memory.</p>
 <p>In the provided code, the buffer pool was represented as an array of pages:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">pages_ <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Page[pool_size_];
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">pages_ <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Page[pool_size_];
 </code></pre></div><p>which ensures a consecutive memory space for the buffer pool.</p>
 <p>This is also emphasized in the <a href="https://15445.courses.cs.cmu.edu/fall2020/project1/">project description</a>:</p>
 <blockquote>
@@ -257,7 +257,7 @@ It turned out that a poor choice could lead to an extremely poor performance and
 In this test, the buffer pool size is set to 100k.
 50k new pages are created and unpinned immediately, followed by creating another 100k new pages.
 Since there is not enough space to store the second half of the 100k pages, the unpinned 50k new pages would be replaced.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">TEST(BufferPoolManagerTest, HugeBufferTest) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">TEST(BufferPoolManagerTest, HugeBufferTest) {
  <span style="color:#66d9ef">const</span> std<span style="color:#f92672">::</span>string db_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;test.db&#34;</span>;
  <span style="color:#66d9ef">int</span> buffer_pool_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">100000</span>;
  
@@ -286,9 +286,9 @@ Since there is not enough space to store the second half of the 100k pages, the 
 </code></pre></div><p>During the whole process, the <code>Pin</code>, <code>Unpin</code>, and <code>Victim</code> methods of the replacer would be called multiple times.</p>
 <p>The following code shows the initial implementation of these methods.
 In the header file, we use a <code>std::list</code> to represent the unpinned frames:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">std<span style="color:#f92672">::</span>list<span style="color:#f92672">&lt;</span>frame_id_t<span style="color:#f92672">&gt;</span> unpinned_frames_;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">std<span style="color:#f92672">::</span>list<span style="color:#f92672">&lt;</span>frame_id_t<span style="color:#f92672">&gt;</span> unpinned_frames_;
 </code></pre></div><p>In the <code>cpp</code> file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">bool</span> LRUReplacer<span style="color:#f92672">::</span>Victim(frame_id_t <span style="color:#f92672">*</span>frame_id) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">bool</span> LRUReplacer<span style="color:#f92672">::</span>Victim(frame_id_t <span style="color:#f92672">*</span>frame_id) {
  <span style="color:#66d9ef">if</span> (unpinned_frames_.empty()) {
    <span style="color:#66d9ef">return</span> false;
  }
@@ -312,13 +312,13 @@ In the header file, we use a <code>std::list</code> to represent the unpinned fr
 We use <code>std::find</code> to iterate through the list.
 For <code>Pin</code>, we could have used the same check, but <a href="https://www.cplusplus.com/reference/list/list/remove/">the way that the <code>remove</code> method of <code>std::list</code> works</a> ensures that it won&rsquo;t be a problem if the element doesn&rsquo;t exist.</p>
 <p>The execution time was 93 seconds.</p>
-<pre><code>[ RUN      ] BufferPoolManagerTest.HugeBufferTest
+<pre tabindex="0"><code>[ RUN      ] BufferPoolManagerTest.HugeBufferTest
 [       OK ] BufferPoolManagerTest.HugeBufferTest (93522 ms)
 </code></pre><p>The improved implementation is as follows:</p>
 <p>In the header file, add:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">std<span style="color:#f92672">::</span>set<span style="color:#f92672">&lt;</span>frame_id_t<span style="color:#f92672">&gt;</span> frames_set_;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">std<span style="color:#f92672">::</span>set<span style="color:#f92672">&lt;</span>frame_id_t<span style="color:#f92672">&gt;</span> frames_set_;
 </code></pre></div><p>In the <code>cpp</code> file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">bool</span> LRUReplacer<span style="color:#f92672">::</span>Victim(frame_id_t <span style="color:#f92672">*</span>frame_id) {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">bool</span> LRUReplacer<span style="color:#f92672">::</span>Victim(frame_id_t <span style="color:#f92672">*</span>frame_id) {
  <span style="color:#66d9ef">if</span> (unpinned_frames_.empty()) {
    <span style="color:#66d9ef">return</span> false;
  }
@@ -350,7 +350,7 @@ We add and remove elements to the list and set simultaneously, so their sizes ar
 The key difference between the two implementations is that in the second implementation, we check if a frame is in the free list by using the <code>find</code> method of the <code>frame_set_</code>.
 Also, we check if an element is in the list before removing it.
 The execution time of the second implementation is:</p>
-<pre><code>[ RUN      ] BufferPoolManagerTest.HugeBufferTest
+<pre tabindex="0"><code>[ RUN      ] BufferPoolManagerTest.HugeBufferTest
 [       OK ] BufferPoolManagerTest.HugeBufferTest (760 ms)
 </code></pre><p>We achieved a 100x speedup!</p>
 <h2 id="how-unpin-gets-faster">How <code>Unpin</code> gets faster?</h2>

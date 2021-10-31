@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no"/>
 
-    <title>Tags | Chengxin Ma</title>
+    <title>Notes on the Decorator Design Pattern | Chengxin Ma</title>
     
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -28,8 +28,6 @@
     
     
  
-    
-    <link rel="alternate" type="application/rss+xml" href="https://cxma.me/tags/index.xml" title="Chengxin Ma" />
     </head>
 
     <body>
@@ -121,30 +119,52 @@
         <div id="content" class="content-container">
         
 
-<h1>Tags</h1>
+<h1 class="post-title">Notes on the Decorator Design Pattern</h1>
+    
+    <time>October 31, 2021</time>
+    
+    <div>
+        <p>
+        <p>The Decorator Pattern (a.k.a. wrapper) belongs to the catalogue of structural patterns as defined in the book <em>Design Patterns</em> by GoF.</p>
+<p>This pattern intends to <strong>dynamically</strong> and <strong>transparently</strong> attach additional responsibility to an object instead of using inheritance.
+<a href="https://stackoverflow.com/a/2707195/5723556">It is recognizable by creational methods taking an instance of the same abstract/interface type which adds additional behaviour.</a>
+(One example can be found <a href="https://github.com/openjdk/jdk/blob/bf2e9ee9d321ed289466b2410f12ad10504d01a2/src/java.base/share/classes/java/io/FilterInputStream.java#L56">here</a>.)</p>
+<p>Two key features of this pattern are that:</p>
 <ul>
-    
-        <li><a href="https://cxma.me/tags/async/">async</a> 1</li>
-    
-        <li><a href="https://cxma.me/tags/c&#43;&#43;/">C&#43;&#43;</a> 2</li>
-    
-        <li><a href="https://cxma.me/tags/cmu/">CMU</a> 2</li>
-    
-        <li><a href="https://cxma.me/tags/database/">database</a> 2</li>
-    
-        <li><a href="https://cxma.me/tags/design-pattern/">design-pattern</a> 1</li>
-    
-        <li><a href="https://cxma.me/tags/java/">Java</a> 2</li>
-    
-        <li><a href="https://cxma.me/tags/kotlin/">Kotlin</a> 2</li>
-    
-        <li><a href="https://cxma.me/tags/python/">Python</a> 1</li>
-    
-        <li><a href="https://cxma.me/tags/spring/">Spring</a> 2</li>
-    
+<li>The decorator (wrapper) conforms to the same interface of the object that is being decorated (wrappee).</li>
+<li>Decorators can be nested.</li>
 </ul>
+<p><a href="https://refactoring.guru/design-patterns/decorator">This article</a> explains the Decorator Pattern in more detail with examples. It also discusses the pros and cons of this pattern to facilitate its proper usage.</p>
+<h1 id="the-decorator-pattern-and-some-programming-languages">The Decorator Pattern and some programming languages</h1>
+<h2 id="python">Python</h2>
+<p><a href="https://wiki.python.org/moin/DecoratorPattern">This page</a> shows an example of the Decorator Pattern in Python.
+In Python, there is also a language feature called Decorator, but it is different from the Decorator Pattern because it is for modifying a function or class.</p>
+<h2 id="kotlin">Kotlin</h2>
+<p>The Kotlin programming language has a feature <a href="https://kotlinlang.org/docs/extensions.html">extension</a> that can add new functionalities to a class without using inheritance or the Decorator Pattern.</p>
+<h2 id="java">Java</h2>
+<p>Examples of the Decorator Pattern can be found in the source code of Java core libraries, such as what is described <a href="https://stackoverflow.com/a/6366543/5723556">here</a>.
+This is also a good example showing the two features of this pattern mentioned above.</p>
+        </p>
+    </div>
+    
 
-<div class="page-footer"></div>
+    
+
+    <div class="page-footer">
+        
+        <hr class="footer-divider">
+        
+            <a class="tag" href="/tags/design-pattern">#design-pattern</a>
+        
+            <a class="tag" href="/tags/python">#Python</a>
+        
+            <a class="tag" href="/tags/kotlin">#Kotlin</a>
+        
+            <a class="tag" href="/tags/java">#Java</a>
+        
+      
+    </div>
+
 
         
         </div>

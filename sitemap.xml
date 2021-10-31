@@ -2,10 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://cxma.me/tags/c&#43;&#43;/</loc>
-    <lastmod>2021-07-11T16:16:31+08:00</lastmod>
-  </url><url>
     <loc>https://cxma.me/</loc>
+    <lastmod>2021-10-31T20:10:18+01:00</lastmod>
+  </url><url>
+    <loc>https://cxma.me/tags/design-pattern/</loc>
+    <lastmod>2021-10-31T20:10:18+01:00</lastmod>
+  </url><url>
+    <loc>https://cxma.me/tags/java/</loc>
+    <lastmod>2021-10-31T20:10:18+01:00</lastmod>
+  </url><url>
+    <loc>https://cxma.me/tags/kotlin/</loc>
+    <lastmod>2021-10-31T20:10:18+01:00</lastmod>
+  </url><url>
+    <loc>https://cxma.me/posts/notes-on-the-decorator-design-pattern/</loc>
+    <lastmod>2021-10-31T20:10:18+01:00</lastmod>
+  </url><url>
+    <loc>https://cxma.me/posts/</loc>
+    <lastmod>2021-10-31T20:10:18+01:00</lastmod>
+  </url><url>
+    <loc>https://cxma.me/tags/python/</loc>
+    <lastmod>2021-10-31T20:10:18+01:00</lastmod>
+  </url><url>
+    <loc>https://cxma.me/tags/</loc>
+    <lastmod>2021-10-31T20:10:18+01:00</lastmod>
+  </url><url>
+    <loc>https://cxma.me/tags/c&#43;&#43;/</loc>
     <lastmod>2021-07-11T16:16:31+08:00</lastmod>
   </url><url>
     <loc>https://cxma.me/tags/cmu/</loc>
@@ -14,17 +35,8 @@
     <loc>https://cxma.me/tags/database/</loc>
     <lastmod>2021-07-11T16:16:31+08:00</lastmod>
   </url><url>
-    <loc>https://cxma.me/posts/</loc>
-    <lastmod>2021-07-11T16:16:31+08:00</lastmod>
-  </url><url>
     <loc>https://cxma.me/posts/cmu-15445-fall-2020-project-2-checkpoint-1-notes/</loc>
     <lastmod>2021-07-11T16:16:31+08:00</lastmod>
-  </url><url>
-    <loc>https://cxma.me/tags/</loc>
-    <lastmod>2021-07-11T16:16:31+08:00</lastmod>
-  </url><url>
-    <loc>https://cxma.me/tags/kotlin/</loc>
-    <lastmod>2021-05-26T16:00:44+02:00</lastmod>
   </url><url>
     <loc>https://cxma.me/posts/sending-emails-using-spring-boot-and-kotlin/</loc>
     <lastmod>2021-05-26T16:00:44+02:00</lastmod>
@@ -33,9 +45,6 @@
     <lastmod>2021-05-26T16:00:44+02:00</lastmod>
   </url><url>
     <loc>https://cxma.me/tags/async/</loc>
-    <lastmod>2021-05-10T13:50:01+02:00</lastmod>
-  </url><url>
-    <loc>https://cxma.me/tags/java/</loc>
     <lastmod>2021-05-10T13:50:01+02:00</lastmod>
   </url><url>
     <loc>https://cxma.me/posts/notes-on-spring-tutorial-creating-asynchronous-methods/</loc>

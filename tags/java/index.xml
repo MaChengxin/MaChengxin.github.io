@@ -6,7 +6,16 @@
     <description>Recent content in Java on Chengxin Ma</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 May 2021 13:50:01 +0200</lastBuildDate><atom:link href="https://cxma.me/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 31 Oct 2021 20:10:18 +0100</lastBuildDate><atom:link href="https://cxma.me/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Notes on the Decorator Design Pattern</title>
+      <link>https://cxma.me/posts/notes-on-the-decorator-design-pattern/</link>
+      <pubDate>Sun, 31 Oct 2021 20:10:18 +0100</pubDate>
+      
+      <guid>https://cxma.me/posts/notes-on-the-decorator-design-pattern/</guid>
+      <description>&lt;p&gt;The Decorator Pattern (a.k.a. wrapper) belongs to the catalogue of structural patterns as defined in the book &lt;em&gt;Design Patterns&lt;/em&gt; by GoF.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Notes on Spring Tutorial: Creating Asynchronous Methods</title>
       <link>https://cxma.me/posts/notes-on-spring-tutorial-creating-asynchronous-methods/</link>

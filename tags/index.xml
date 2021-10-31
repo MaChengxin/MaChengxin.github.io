@@ -6,7 +6,43 @@
     <description>Recent content in Tags on Chengxin Ma</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 11 Jul 2021 16:16:31 +0800</lastBuildDate><atom:link href="https://cxma.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 31 Oct 2021 20:10:18 +0100</lastBuildDate><atom:link href="https://cxma.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>design-pattern</title>
+      <link>https://cxma.me/tags/design-pattern/</link>
+      <pubDate>Sun, 31 Oct 2021 20:10:18 +0100</pubDate>
+      
+      <guid>https://cxma.me/tags/design-pattern/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>https://cxma.me/tags/java/</link>
+      <pubDate>Sun, 31 Oct 2021 20:10:18 +0100</pubDate>
+      
+      <guid>https://cxma.me/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kotlin</title>
+      <link>https://cxma.me/tags/kotlin/</link>
+      <pubDate>Sun, 31 Oct 2021 20:10:18 +0100</pubDate>
+      
+      <guid>https://cxma.me/tags/kotlin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://cxma.me/tags/python/</link>
+      <pubDate>Sun, 31 Oct 2021 20:10:18 +0100</pubDate>
+      
+      <guid>https://cxma.me/tags/python/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>C&#43;&#43;</title>
       <link>https://cxma.me/tags/c&#43;&#43;/</link>
@@ -35,15 +71,6 @@
     </item>
     
     <item>
-      <title>Kotlin</title>
-      <link>https://cxma.me/tags/kotlin/</link>
-      <pubDate>Wed, 26 May 2021 16:00:44 +0200</pubDate>
-      
-      <guid>https://cxma.me/tags/kotlin/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Spring</title>
       <link>https://cxma.me/tags/spring/</link>
       <pubDate>Wed, 26 May 2021 16:00:44 +0200</pubDate>
@@ -58,15 +85,6 @@
       <pubDate>Mon, 10 May 2021 13:50:01 +0200</pubDate>
       
       <guid>https://cxma.me/tags/async/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Java</title>
-      <link>https://cxma.me/tags/java/</link>
-      <pubDate>Mon, 10 May 2021 13:50:01 +0200</pubDate>
-      
-      <guid>https://cxma.me/tags/java/</guid>
       <description></description>
     </item>
     

@@ -169,7 +169,7 @@ If all threads are busy with other tasks, the new task will be queued, or we can
 <h2 id="future">Future</h2>
 <p>A <code>Future</code> represents the result of an asynchronous computation.</p>
 <p>Here is a simple example: (Source: <a href="https://www.baeldung.com/java-future">Baeldung</a>)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SquareCalculator</span> <span style="color:#f92672">{</span>    
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SquareCalculator</span> <span style="color:#f92672">{</span>    
     
     <span style="color:#66d9ef">private</span> ExecutorService executor 
       <span style="color:#f92672">=</span> Executors<span style="color:#f92672">.</span><span style="color:#a6e22e">newSingleThreadExecutor</span><span style="color:#f92672">();</span>
@@ -181,7 +181,7 @@ If all threads are busy with other tasks, the new task will be queued, or we can
         <span style="color:#f92672">});</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Future<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> future <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SquareCalculator<span style="color:#f92672">().</span><span style="color:#a6e22e">calculate</span><span style="color:#f92672">(</span>10<span style="color:#f92672">);</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Future<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> future <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> SquareCalculator<span style="color:#f92672">().</span><span style="color:#a6e22e">calculate</span><span style="color:#f92672">(</span>10<span style="color:#f92672">);</span>
 
 <span style="color:#66d9ef">while</span><span style="color:#f92672">(!</span>future<span style="color:#f92672">.</span><span style="color:#a6e22e">isDone</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
     System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Calculating...&#34;</span><span style="color:#f92672">);</span>
@@ -196,14 +196,14 @@ It is a blocking method: it will wait until the result of the asynchronous compu
 <p>A <code>Completable Future</code> is a <code>Future</code> that may be explicitly completed, and may be used as a <code>CompletionStage</code>,
 enabling us to chain operations together.</p>
 <p>Examples: (Source: <a href="https://www.baeldung.com/java-completablefuture">Baeldung</a>)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> completableFuture
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> completableFuture
   <span style="color:#f92672">=</span> CompletableFuture<span style="color:#f92672">.</span><span style="color:#a6e22e">supplyAsync</span><span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;Hello&#34;</span><span style="color:#f92672">);</span>
 
 CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> future <span style="color:#f92672">=</span> completableFuture
   <span style="color:#f92672">.</span><span style="color:#a6e22e">thenApply</span><span style="color:#f92672">(</span>s <span style="color:#f92672">-&gt;</span> s <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; World&#34;</span><span style="color:#f92672">);</span>
 
 assertEquals<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hello World&#34;</span><span style="color:#f92672">,</span> future<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">());</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> completableFuture
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">CompletableFuture<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> completableFuture
   <span style="color:#f92672">=</span> CompletableFuture<span style="color:#f92672">.</span><span style="color:#a6e22e">supplyAsync</span><span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;Hello&#34;</span><span style="color:#f92672">);</span>
 
 CompletableFuture<span style="color:#f92672">&lt;</span>Void<span style="color:#f92672">&gt;</span> future <span style="color:#f92672">=</span> completableFuture
@@ -214,7 +214,7 @@ future<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span>
 <p>In <code>AppRunner</code>, we added three more users for <code>findUser</code>.
 The thread pool size was also increased to 3.</p>
 <p>The snippet of the log:</p>
-<pre><code>2021-05-11 22:06:56.045  INFO 20008 --- [ GithubLookup-3] c.e.asyncmethod.GitHubLookupService      : Looking up Spring-Projects
+<pre tabindex="0"><code>2021-05-11 22:06:56.045  INFO 20008 --- [ GithubLookup-3] c.e.asyncmethod.GitHubLookupService      : Looking up Spring-Projects
 2021-05-11 22:06:56.045  INFO 20008 --- [ GithubLookup-1] c.e.asyncmethod.GitHubLookupService      : Looking up PivotalSoftware
 2021-05-11 22:06:56.045  INFO 20008 --- [ GithubLookup-2] c.e.asyncmethod.GitHubLookupService      : Looking up CloudFoundry
 2021-05-11 22:06:57.602  INFO 20008 --- [ GithubLookup-3] c.e.asyncmethod.GitHubLookupService      : Looking up Google
@@ -235,7 +235,7 @@ The thread pool size was also increased to 3.</p>
 <p>The annotation <code>@Async</code> indicates that the annotated method should run on a separate thread.
 The <code>@EnableAsync</code> annotation switches on Spring’s ability to run <code>@Async</code> methods in a background thread pool.
 If we disable the <code>@Async</code> annotation, the log would be:</p>
-<pre><code>2021-05-11 22:08:20.260  INFO 20024 --- [           main] c.e.asyncmethod.GitHubLookupService      : Looking up PivotalSoftware
+<pre tabindex="0"><code>2021-05-11 22:08:20.260  INFO 20024 --- [           main] c.e.asyncmethod.GitHubLookupService      : Looking up PivotalSoftware
 2021-05-11 22:08:21.812  INFO 20024 --- [           main] c.e.asyncmethod.GitHubLookupService      : Looking up CloudFoundry
 2021-05-11 22:08:22.964  INFO 20024 --- [           main] c.e.asyncmethod.GitHubLookupService      : Looking up Spring-Projects
 2021-05-11 22:08:24.124  INFO 20024 --- [           main] c.e.asyncmethod.GitHubLookupService      : Looking up Google

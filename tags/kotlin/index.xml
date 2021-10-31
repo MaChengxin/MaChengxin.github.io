@@ -6,7 +6,16 @@
     <description>Recent content in Kotlin on Chengxin Ma</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 26 May 2021 16:00:44 +0200</lastBuildDate><atom:link href="https://cxma.me/tags/kotlin/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 31 Oct 2021 20:10:18 +0100</lastBuildDate><atom:link href="https://cxma.me/tags/kotlin/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Notes on the Decorator Design Pattern</title>
+      <link>https://cxma.me/posts/notes-on-the-decorator-design-pattern/</link>
+      <pubDate>Sun, 31 Oct 2021 20:10:18 +0100</pubDate>
+      
+      <guid>https://cxma.me/posts/notes-on-the-decorator-design-pattern/</guid>
+      <description>&lt;p&gt;The Decorator Pattern (a.k.a. wrapper) belongs to the catalogue of structural patterns as defined in the book &lt;em&gt;Design Patterns&lt;/em&gt; by GoF.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Sending Emails Using Spring Boot and Kotlin</title>
       <link>https://cxma.me/posts/sending-emails-using-spring-boot-and-kotlin/</link>

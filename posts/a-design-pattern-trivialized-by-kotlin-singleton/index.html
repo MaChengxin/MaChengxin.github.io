@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no"/>
+
+    <title>A Design Pattern Trivialized by Kotlin: Singleton | Chengxin Ma</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#FF3DB4">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cxma.me/css/main.min.113b8750726301d2272b2fabf9695ed6bfe79dff4f4cd582cb3010010ebceea4.css"/>
+
+    
+    
+    
+
+    
+    
+ 
+    </head>
+
+    <body>
+        
+<nav>
+  <header>
+    <div class="site-title">
+        <a href="/">Chengxin Ma</a>
+    </div>  
+</header>
+
+  <div class="nav-menu">
+  
+    <a class="color-link nav-link" href="/contact/">Contact</a>
+  
+    <a class="color-link nav-link" href="/tags/">Tags</a>
+  
+</div>
+<footer class="footer">
+	<div class="social-icons">
+        
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+
+	<script src="https://cxma.me/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+</footer>
+</nav>
+
+        <div id="content" class="content-container">
+        
+
+<h1 class="post-title">A Design Pattern Trivialized by Kotlin: Singleton</h1>
+    
+    <time>November 18, 2021</time>
+    
+    <div>
+        <p>
+        <p><em>This article describes the widely used design pattern Singleton, and shows how it is trivialized in Kotlin &ndash; there is a simple way to implement this pattern correctly, and with less effort.</em></p>
+<!-- raw HTML omitted -->
+<p>Sometimes we only allow one instance of a class in our program, and we would like this instance to be easily accessed.
+(e.g. a logging class, read more <a href="https://stackoverflow.com/questions/228164/on-design-patterns-when-should-i-use-the-singleton">here</a>.)</p>
+<p>How can we ensure this?</p>
+<!-- raw HTML omitted -->
+<p>The Singleton pattern, which <a href="https://en.wikipedia.org/wiki/Singleton_pattern">restricts the instantiation of a class to one &ldquo;single&rdquo; instance</a>, is the solution.
+It solves the problem by making the class itself responsible for two things:</p>
+<ul>
+<li>keeping track of the single instance (i.e. the singleton)</li>
+<li>providing access to this instance</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>To achieve these two points, a typical implementation (in Java) will need to:</p>
+<ul>
+<li>make the constructor private, such that no other objects can construct it</li>
+<li>create a static method that has the following pattern:</li>
+</ul>
+<pre tabindex="0"><code>if instance is null -&gt;
+    - create an instance using the private constructor
+    - store the instance in a static field
+    - and return it to the caller
+else -&gt; 
+    - return the instance directly
+</code></pre><p>This is called “late initialization”, as the instance is not initialized until it is needed.</p>
+<p><a href="https://refactoring.guru/design-patterns/singleton/java/example">Here</a> are some nice examples in Java, implementing this pattern in both single- and multi- threaded scenarios.
+Note that in the multithreaded example, a technique called <a href="https://en.wikipedia.org/wiki/Double-checked_locking">double-checked locking</a> is used to prevent race conditions.
+Some people <a href="https://stackoverflow.com/questions/35587652/kotlin-thread-safe-native-lazy-singleton-with-parameter">argue that double-check lock is not the recommended way and suggest other solutions</a>, but nevertheless we need to do extra stuff to guarantee thread safety.</p>
+<!-- raw HTML omitted -->
+<p>Java is sometimes regarded as a &ldquo;verbose&rdquo; language, while Kotlin is seen as a &ldquo;more concise Java&rdquo; in some cases.
+Here comes an example: the implementation of the Singleton pattern is made much easier in Kotlin.
+We simply need to use an <a href="https://kotlinlang.org/docs/object-declarations.html#object-declarations-overview">object declaration</a> (example taken from the Kotlin doc):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Kotlin" data-lang="Kotlin"><span style="color:#66d9ef">object</span> <span style="color:#a6e22e">DataProviderManager</span> {
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">registerDataProvider</span>(provider: DataProvider) {
+        <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>    }
+
+    <span style="color:#66d9ef">val</span> allDataProviders: Collection&lt;DataProvider&gt;
+        <span style="color:#66d9ef">get</span>() = <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>}
+</code></pre></div><p>And the way to use it is straightforward:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Kotlin" data-lang="Kotlin">DataProviderManager.registerDataProvider(<span style="color:#f92672">..</span>.)
+</code></pre></div><p>The cool thing about this language feature is that,
+besides simplicity, Kotlin also ensures thread safety <strong>out-of-the-box</strong>.</p>
+<p>Note that singletons in Kotlin are initialized lazily.</p>
+        </p>
+    </div>
+    
+
+    
+
+    <div class="page-footer">
+        
+        <hr class="footer-divider">
+        
+            <a class="tag" href="/tags/design-pattern">#design-pattern</a>
+        
+            <a class="tag" href="/tags/kotlin">#Kotlin</a>
+        
+            <a class="tag" href="/tags/java">#Java</a>
+        
+      
+    </div>
+
+
+        
+        </div>
+        <footer class="footer-mobile">
+	<div class="social-icons">
+        
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<div class="footer-mobile-links">
+		<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+		<span class="divider-bar">|</span>
+		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+	</div>
+
+	<script src="https://cxma.me/js/main.min.c1aee25a817e9beb1f9c4afd9d62311227a7f5e46720e404dc1dda97281f47f2.js" integrity="sha256-wa7iWoF+m+sfnEr9nWIxEien9eRnIOQE3B3alygfR/I=" crossorigin="anonymous"></script>
+</footer>
+    </body>
+</html>

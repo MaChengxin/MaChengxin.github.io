@@ -6,7 +6,16 @@
     <description>Recent content in design-pattern on Chengxin Ma</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 31 Oct 2021 20:10:18 +0100</lastBuildDate><atom:link href="https://cxma.me/tags/design-pattern/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 18 Nov 2021 20:50:34 +0100</lastBuildDate><atom:link href="https://cxma.me/tags/design-pattern/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A Design Pattern Trivialized by Kotlin: Singleton</title>
+      <link>https://cxma.me/posts/a-design-pattern-trivialized-by-kotlin-singleton/</link>
+      <pubDate>Thu, 18 Nov 2021 20:50:34 +0100</pubDate>
+      
+      <guid>https://cxma.me/posts/a-design-pattern-trivialized-by-kotlin-singleton/</guid>
+      <description>&lt;p&gt;&lt;em&gt;This article describes the widely used design pattern Singleton, and shows how it is trivialized in Kotlin &amp;ndash; there is a simple way to implement this pattern correctly, and with less effort.&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Notes on the Decorator Design Pattern</title>
       <link>https://cxma.me/posts/notes-on-the-decorator-design-pattern/</link>

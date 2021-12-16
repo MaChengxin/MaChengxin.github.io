@@ -2,25 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://cxma.me/posts/a-design-pattern-trivialized-by-kotlin-singleton/</loc>
-    <lastmod>2021-11-18T20:50:34+01:00</lastmod>
-  </url><url>
     <loc>https://cxma.me/</loc>
-    <lastmod>2021-11-18T20:50:34+01:00</lastmod>
+    <lastmod>2021-12-16T21:54:30+01:00</lastmod>
+  </url><url>
+    <loc>https://cxma.me/posts/design-pattern-family-factory/</loc>
+    <lastmod>2021-12-16T21:54:30+01:00</lastmod>
   </url><url>
     <loc>https://cxma.me/tags/design-pattern/</loc>
+    <lastmod>2021-12-16T21:54:30+01:00</lastmod>
+  </url><url>
+    <loc>https://cxma.me/posts/</loc>
+    <lastmod>2021-12-16T21:54:30+01:00</lastmod>
+  </url><url>
+    <loc>https://cxma.me/tags/</loc>
+    <lastmod>2021-12-16T21:54:30+01:00</lastmod>
+  </url><url>
+    <loc>https://cxma.me/posts/a-design-pattern-trivialized-by-kotlin-singleton/</loc>
     <lastmod>2021-11-18T20:50:34+01:00</lastmod>
   </url><url>
     <loc>https://cxma.me/tags/java/</loc>
     <lastmod>2021-11-18T20:50:34+01:00</lastmod>
   </url><url>
     <loc>https://cxma.me/tags/kotlin/</loc>
-    <lastmod>2021-11-18T20:50:34+01:00</lastmod>
-  </url><url>
-    <loc>https://cxma.me/posts/</loc>
-    <lastmod>2021-11-18T20:50:34+01:00</lastmod>
-  </url><url>
-    <loc>https://cxma.me/tags/</loc>
     <lastmod>2021-11-18T20:50:34+01:00</lastmod>
   </url><url>
     <loc>https://cxma.me/posts/notes-on-the-decorator-design-pattern/</loc>

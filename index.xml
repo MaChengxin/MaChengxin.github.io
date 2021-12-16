@@ -6,7 +6,16 @@
     <description>Recent content on Chengxin Ma</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 18 Nov 2021 20:50:34 +0100</lastBuildDate><atom:link href="https://cxma.me/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 16 Dec 2021 21:54:30 +0100</lastBuildDate><atom:link href="https://cxma.me/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Design Pattern Family: Factory</title>
+      <link>https://cxma.me/posts/design-pattern-family-factory/</link>
+      <pubDate>Thu, 16 Dec 2021 21:54:30 +0100</pubDate>
+      
+      <guid>https://cxma.me/posts/design-pattern-family-factory/</guid>
+      <description>&lt;p&gt;Slides used for presenting three design patterns: Simple Factory, Factory Method, and Abstract Factory.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>A Design Pattern Trivialized by Kotlin: Singleton</title>
       <link>https://cxma.me/posts/a-design-pattern-trivialized-by-kotlin-singleton/</link>
